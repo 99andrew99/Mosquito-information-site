@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/Mosquito-information-site/static/js/main.5faf3264.js",
+    "main.js": "/Mosquito-information-site/static/js/main.520c503c.js",
     "index.html": "/Mosquito-information-site/index.html",
-    "main.5faf3264.js.map": "/Mosquito-information-site/static/js/main.5faf3264.js.map"
+    "main.520c503c.js.map": "/Mosquito-information-site/static/js/main.520c503c.js.map"
   },
   "entrypoints": [
-    "static/js/main.5faf3264.js"
+    "static/js/main.520c503c.js"
   ]
 }
