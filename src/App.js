@@ -22,6 +22,10 @@ const TopContainer = styled.div`
     bottom: 0;
     background: rgba(255, 255, 255, 0.8); /* 흰색 반투명 오버레이 */
   }
+
+  @media (max-width: 768px) {
+    height: 220vh; /* 모바일 화면에서의 높이 수정 */
+  }
 `;
 
 const FirstPage = styled.div`
@@ -43,6 +47,10 @@ const FirstTitle = styled.div`
   font-weight: 600;
   margin-top: 20px;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const FirstMoContainer = styled.div`
@@ -52,12 +60,21 @@ const FirstMoContainer = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    height: 50%;
+  }
 `;
 
 const FirstMoImg = styled.img`
   width: 200px;
   height: 200px;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const FirstWarnContainer = styled.div`
@@ -72,6 +89,10 @@ const FirstWarnText = styled.p`
   font-size: 3rem;
   font-weight: 700;
   color: ${(props) => props.color};
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const SecondPage = styled.div`
@@ -79,9 +100,13 @@ const SecondPage = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   z-index: 2;
   /* background-color: tomato; */
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const SecondTodayContainer = styled.div`
@@ -89,20 +114,37 @@ const SecondTodayContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 40%;
+
+  @media (max-width: 768px) {
+    width: 80%;
+    height: 40%;
+  }
 `;
 
 const SecondTitle = styled.p`
   font-size: 2.5rem;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 const SecondTextContainer = styled.div`
   display: flex;
   width: 40%;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const SecondText = styled.p`
   font-size: 1.4rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const SecondResultContainer = styled.div`
@@ -110,6 +152,11 @@ const SecondResultContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 40%;
+
+  @media (max-width: 768px) {
+    width: 80%;
+    height: 40%;
+  }
 `;
 
 function getMosquitoLevelText(value) {
