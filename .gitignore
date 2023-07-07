@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 #api key
-#open api key라 임시로 해제
+#open api key
 # .env
