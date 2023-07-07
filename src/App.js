@@ -8,28 +8,30 @@ const TopContainer = styled.div`
   height: 200vh;
   display: flex;
   flex-direction: column;
-`;
-
-const FirstPage = styled.div`
-  width: 100vw;
-  height: 100vh;
   background-image: url("/images/mainBg.jpg");
   background-position: center;
   background-size: cover;
-  /* background-color: greenyellow; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-attachment: fixed;
 
   &:before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: rgba(255, 255, 255, 0.8); /* 흰색 반투명 오버레이 */
   }
+`;
+
+const FirstPage = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+  /* background-color: greenyellow; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const FirstTitle = styled.div`
@@ -75,17 +77,63 @@ const FirstWarnText = styled.p`
 const SecondPage = styled.div`
   width: 100vw;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
   /* background-color: tomato; */
 `;
 
-const SecondTodayContainer = styled.div``;
-const SecondResultContainer = styled.div``;
+const SecondTodayContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+`;
+
+const SecondTitle = styled.p`
+  font-size: 2.5rem;
+  font-weight: 600;
+`;
+const SecondTextContainer = styled.div`
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+`;
+const SecondText = styled.p`
+  font-size: 1.4rem;
+  font-weight: 500;
+`;
+
+const SecondResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+`;
+
+function getMosquitoLevelText(value) {
+  value = parseFloat(value);
+  if (value < 25) {
+    return "1단계(쾌적)";
+  } else if (value < 50) {
+    return "2단계(관심)";
+  } else if (value < 75) {
+    return "3단계(주의)";
+  } else {
+    return "4단계(불쾌)";
+  }
+}
 
 function App() {
   const [result, setResult] = useState({});
   const [load, setLoad] = useState(false);
   const [mosquitoCount, setMosquitoCount] = useState(0);
   const [warnText, setWarnText] = useState({ text: "", color: "black" });
+  const [houseLevel, setHouseLevel] = useState("");
+  const [parkLevel, setParkLevel] = useState("");
+  const [waterLevel, setWaterLevel] = useState("");
+  const [averageLevel, setAverageLevel] = useState("");
 
   useEffect(() => {
     // call_api().then((data) => console.log(data));
@@ -108,6 +156,11 @@ function App() {
       const water = parseFloat(result.MOSQUITO_VALUE_WATER);
 
       const average = (house + park + water) / 3;
+
+      setHouseLevel(getMosquitoLevelText(house));
+      setParkLevel(getMosquitoLevelText(park));
+      setWaterLevel(getMosquitoLevelText(water));
+      setAverageLevel(getMosquitoLevelText(average));
 
       if (average < 25) {
         setMosquitoCount(1);
@@ -159,7 +212,54 @@ function App() {
           </FirstWarnContainer>
         </FirstPage>
 
-        <SecondPage></SecondPage>
+        <SecondPage>
+          <SecondTodayContainer>
+            <SecondTitle>오늘의 모기지수</SecondTitle>
+
+            <SecondTextContainer>
+              <SecondText>모기지수 발생일: </SecondText>
+              <SecondText>{result.MOSQUITO_DATE}</SecondText>
+            </SecondTextContainer>
+
+            <SecondTextContainer>
+              <SecondText>모기지수(수변부): </SecondText>
+              <SecondText>{result.MOSQUITO_VALUE_WATER}</SecondText>
+            </SecondTextContainer>
+
+            <SecondTextContainer>
+              <SecondText>모기지수(주거지): </SecondText>
+              <SecondText>{result.MOSQUITO_VALUE_HOUSE}</SecondText>
+            </SecondTextContainer>
+
+            <SecondTextContainer>
+              <SecondText>모기지수(공원): </SecondText>
+              <SecondText>{result.MOSQUITO_VALUE_PARK}</SecondText>
+            </SecondTextContainer>
+          </SecondTodayContainer>
+
+          <SecondResultContainer>
+            <SecondTitle>모기 발생 단계</SecondTitle>
+            <SecondTextContainer>
+              <SecondText>모기지수(수변부): </SecondText>
+              <SecondText>{waterLevel}</SecondText>
+            </SecondTextContainer>
+
+            <SecondTextContainer>
+              <SecondText>모기지수(주거지): </SecondText>
+              <SecondText>{houseLevel}</SecondText>
+            </SecondTextContainer>
+
+            <SecondTextContainer>
+              <SecondText>모기지수(공원): </SecondText>
+              <SecondText>{parkLevel}</SecondText>
+            </SecondTextContainer>
+
+            <SecondTextContainer>
+              <SecondText>서울시 평균: </SecondText>
+              <SecondText>{averageLevel}</SecondText>
+            </SecondTextContainer>
+          </SecondResultContainer>
+        </SecondPage>
       </TopContainer>
     </>
   );
