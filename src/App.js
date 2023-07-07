@@ -8,7 +8,7 @@ const TopContainer = styled.div`
   height: 200vh;
   display: flex;
   flex-direction: column;
-  background-image: url("/images/mainBg.jpg");
+  background-image: url("images/mainBg.jpg");
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -248,7 +248,7 @@ function App() {
             {Array(mosquitoCount)
               .fill()
               .map((_, i) => (
-                <FirstMoImg key={i} src={"/images/moIcon.png"} />
+                <FirstMoImg key={i} src={"images/moIcon.png"} />
               ))}
           </FirstMoContainer>
 
