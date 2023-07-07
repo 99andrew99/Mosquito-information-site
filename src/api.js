@@ -4,7 +4,7 @@ export async function call_api() {
   // console.log("날짜 테스트", formattedDate);
 
   const response = await fetch(
-    `http://openapi.seoul.go.kr:8088/784b63464677686137304b6a636c70/xml/MosquitoStatus/1/5/${formattedDate}`
+    `http://openapi.seoul.go.kr:8088/${process.env.REACT_APP_API_KEY}/xml/MosquitoStatus/1/5/${formattedDate}`
   );
 
   const data = await response.text();
